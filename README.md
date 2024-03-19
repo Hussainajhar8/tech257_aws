@@ -1,45 +1,43 @@
 ### Launching an AWS EC2 Instance
 
 1. Log into the AWS console.
-2. Navigate to the EC2 section and click on "Launch Instance." ![alt text](image.png)
-3. Fill in the instance details, ensuring to select a Ubuntu 22.04 image and t2.micro instance type.
+2. Navigate to the EC2 section and click on "Launch Instance." ![alt text](img/readme_img/image.png)
+3. Fill in the instance details, ensuring to select a Ubuntu 22.04 img/readme_img/image and t2.micro instance type.
 4. Select "tech257" as the key pair and ensure it has been downloaded and placed in the `.ssh/` folder.
 5. Edit the security group, rename it appropriately, and open ports 80 and 22. Port 3000 is not required to be opened as we will configure a reverse proxy.
 6. Launch the instance when the EC2 configuration is complete.
-![alt text](image-1.png)
+![alt text](img/readme_img/image-1.png)
 
 ### Connecting to the EC2 Instance
 
 1. Once the instance is initialized, open it and click on "Connect" and then "SSH client" to SSH into the virtual machine. Copy and paste the command into a Git Bash terminal.
 
-![
-  
-](image-2.png)
+![alt text](img/readme_img/image-2.png)
 ### Configuring the Instance
 
 1. Update and upgrade the system by running the following commands:
    - `sudo apt update -y`
-   - `sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y`
+   - `sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y`<br>
    Note: The `DEBIAN_FRONTEND=noninteractive` flag is important to ensure there are no user prompts which might interrupt our scripts.
 
-2. Install Nginx:
-   - `sudo DEBIAN_FRONTEND=noninteractive apt install nginx -y`
+2. Install Nginx:<br>
+   `sudo DEBIAN_FRONTEND=noninteractive apt install nginx -y`<br>
    Note: Using `DEBIAN_FRONTEND=noninteractive` bypasses prompts that may arise during scripted deployments.
 
-3. Install Node.js:
-  - ```bash
-    curl -fsSL https://deb.nodesource.com/setup_20.x | sudo DEBIAN_FRONTEND=noninteractive -E bash -
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs
-    ```
+3. Install Node.js:<br>
+     ```bash
+      curl -fsSL https://deb.nodesource.com/setup_20.x | sudo DEBIAN_FRONTEND=noninteractive -E bash -
+      sudo DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs
+      ```
 
-4. Clone the application repository into the VM:
-- `git clone https://github.com/Hussainajhar8/tech257_sparta_app.git`
+4. Clone the application repository into the VM:<br>
+  `git clone https://github.com/Hussainajhar8/tech257_sparta_app.git`
 
-5. Configure a reverse proxy to redirect traffic from port 80 to the application running on port 3000: `sudo sed -i '51s/.*/ proxy_pass http://localhost:3000;/' /etc/nginx/sites-available/default`
+5. Configure a reverse proxy to redirect traffic from port 80 to the application running on port 3000:<br> `sudo sed -i '51s/.*/ proxy_pass http://localhost:3000;/' /etc/nginx/sites-available/default`
 
 
-6. Reload Nginx to apply the changes:
-- `sudo DEBIAN_FRONTEND=noninteractive systemctl reload nginx`
+6. Reload Nginx to apply the changes:<br>
+  `sudo DEBIAN_FRONTEND=noninteractive systemctl reload nginx`
 
 7. Change directory into the application folder, install dependencies, and start the application using PM2:
  -  ```bash
@@ -50,7 +48,7 @@
     pm2 start app.js
     ```
 The end product should be a working application!
-![alt text](image-3.png)
+![alt text](img/readme_img/image-3.png)
 To automate this process we can write this all as a script and enter this as user data upon creating and launching an instance
 
 ### Final script

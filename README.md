@@ -25,15 +25,20 @@
    Note: Using `DEBIAN_FRONTEND=noninteractive` bypasses prompts that may arise during scripted deployments.
 
 3. Install Node.js:<br>
-     ```bash
-      curl -fsSL https://deb.nodesource.com/setup_20.x | sudo DEBIAN_FRONTEND=noninteractive -E bash -
-      sudo DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs
-      ```
+    ```bash
+    curl -fsSL https://deb.nodesource.com/setup_20.x | sudo DEBIAN_FRONTEND=noninteractive -E bash -
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs
+    ```
+    (If we didn’t use the DEBIAN_FRONTEND=noninteractive we will get the following prompt)<br>
+    ![alt text](img/readme_img/image-4.png)
+    This isn’t an issue now when deploying the application manually but it should be bypassed when scripting. <br>
+    Another solution to the restart prompt is to enable it automatically in the needrestart.conf file which can be found in `/etc/needrestart/needrestart.conf`, you would need to edit `#$nrconf{restart} = 'i'`; to `#$nrconf{restart} = 'a'`;, this could be done manually using `sudo nano /etc/needrestart/needrestart.conf` and in a script using the `sed` command.
+
 
 4. Clone the application repository into the VM:<br>
   `git clone https://github.com/Hussainajhar8/tech257_sparta_app.git`
 
-5. Configure a reverse proxy to redirect traffic from port 80 to the application running on port 3000:<br> `sudo sed -i '51s/.*/ proxy_pass http://localhost:3000;/' /etc/nginx/sites-available/default`
+1. Configure a reverse proxy to redirect traffic from port 80 to the application running on port 3000:<br> `sudo sed -i '51s/.*/ proxy_pass http://localhost:3000;/' /etc/nginx/sites-available/default`
 
 
 6. Reload Nginx to apply the changes:<br>

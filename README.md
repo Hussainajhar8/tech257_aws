@@ -1,18 +1,18 @@
 ### Launching an AWS EC2 Instance
 
 1. Log into the AWS console.
-2. Navigate to the EC2 section and click on "Launch Instance." ![alt text](img/readme_img/img/readme_img/image.png)
-3. Fill in the instance details, ensuring to select a Ubuntu 22.04 img/readme_img/img/readme_img/image and t2.micro instance type.
+2. Navigate to the EC2 section and click on "Launch Instance." ![alt text](img/readme_img/image.png)
+3. Fill in the instance details, ensuring to select a Ubuntu 22.04 img/readme_img/image and t2.micro instance type.
 4. Select "tech257" as the key pair and ensure it has been downloaded and placed in the `.ssh/` folder.
 5. Edit the security group, rename it appropriately, and open ports 80 and 22. Port 3000 is not required to be opened as we will configure a reverse proxy.
 6. Launch the instance when the EC2 configuration is complete.
-![alt text](img/readme_img/img/readme_img/image-1.png)
+![alt text](img/readme_img/image-1.png)
 
 ### Connecting to the EC2 Instance
 
 1. Once the instance is initialized, open it and click on "Connect" and then "SSH client" to SSH into the virtual machine. Copy and paste the command into a Git Bash terminal.
 
-![alt text](img/readme_img/img/readme_img/image-2.png)
+![alt text](img/readme_img/image-2.png)
 ### Configuring the Instance
 
 1. Update and upgrade the system by running the following commands:
@@ -30,7 +30,7 @@
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs
     ```
     - (If we didn’t use the DEBIAN_FRONTEND=noninteractive we would of gotten the following prompt)<br>
-    ![alt text](img/readme_img/img/readme_img/image-4.png)
+    ![alt text](img/readme_img/image-4.png)
     - This isn’t an issue now when deploying the application manually, but it should be bypassed when scripting. <br>
     - Another solution to the restart prompt is to enable it automatically in the needrestart.conf file which can be found in `/etc/needrestart/needrestart.conf`, you would need to edit `#$nrconf{restart} = 'i'`; to `#$nrconf{restart} = 'a'`;, this could be done manually using `sudo nano /etc/needrestart/needrestart.conf` and in a script using the `sed` command.
 
@@ -53,7 +53,7 @@
     pm2 start app.js
     ```
 The end product should be a working application!
-![alt text](img/readme_img/img/readme_img/image-3.png)
+![alt text](img/readme_img/image-3.png)
 To automate this process we can write this all as a script and enter this as user data upon creating and launching an instance
 
 ### Final script

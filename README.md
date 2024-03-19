@@ -107,8 +107,8 @@ pm2 save
 #### Deploying the Database Instance
 
 1. Log into the AWS console.
-2. Navigate to the EC2 section and click on "Launch Instance."![alt text](img/readme_img/image-5.png)
-3. Fill in the instance details, ensuring to select a Ubuntu 22.04 img/readme_img/image and t2.micro instance type.
+2. Navigate to the EC2 section and click on "Launch Instance." ![alt text](img/readme_img/image-5.png)
+3. Fill in the instance details, ensuring to select a Ubuntu 22.04 image and t2.micro instance type.
 4. Select "tech257" as the key pair and ensure it has been downloaded and placed in the `.ssh/` folder.
 5. Edit the security group, rename it appropriately, and open port 22 only.
 6. Launch the instance when the EC2 instance has been configured properly.

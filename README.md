@@ -39,8 +39,8 @@
 6. Reload Nginx to apply the changes:<br>
   `sudo DEBIAN_FRONTEND=noninteractive systemctl reload nginx`
 
-7. Change directory into the application folder, install dependencies, and start the application using PM2:
- -  ```bash
+7. Change directory into the application folder, install dependencies, and start the application using PM2:<br>
+    ```bash
     cd tech257_sparta_app/repo/app/
     sudo DEBIAN_FRONTEND=noninteractive npm install
     sudo DEBIAN_FRONTEND=noninteractive npm install pm2@latest -
@@ -93,7 +93,6 @@ pm2 kill
 
 # Start the app
 pm2 start app.js
-
 
 # Save the process
 pm2 save

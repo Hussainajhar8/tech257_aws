@@ -105,7 +105,7 @@ pm2 save
 ### 2-Tier Deployment on AWS
 
 #### Deploying the Database Instance
-
+Similiar to before but now to deploy the database instance
 1. Log into the AWS console.
 2. Navigate to the EC2 section and click on "Launch Instance." ![alt text](img/readme_img/image-5.png)
 3. Fill in the instance details, ensuring to select a Ubuntu 22.04 image and t2.micro instance type.
@@ -116,7 +116,8 @@ pm2 save
 
 #### Connecting to the Database Instance
 
-1. Once the instance is initialized, open it and click on "Connect" and then "SSH client" to SSH into the virtual machine. Copy and paste the command into a Git Bash terminal.
+ Once the instance is initialized, open it and click on "Connect" and then "SSH client" to SSH into the virtual machine. Copy and paste the command into a Git Bash terminal.
+ ![alt text](img/readme_img/image-2.png)
 
 #### Configuring the Database Instance
 
@@ -127,16 +128,16 @@ pm2 save
 2. Install dependencies for MongoDB if they’re not already installed:
    - `sudo apt-get install gnupg curl`
 
-3. Add MongoDB GPG Key:
+3. We need to add the MongoDB GPG Key:
    - `curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | sudo gpg -o /usr/share/keyrings/mongodb-server-7.0.gpg –dearmor`
 
-4. Add the MongoDB repository, update it, and install MongoDB:
+4. Then we need to add the MongoDB repository, update it, and install MongoDB:
    - `echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list`
    - Update the repository: `sudo apt-get update`
    - Install MongoDB:
     `sudo apt-get install -y mongodb-org=7.0.6 mongodb-org-database=7.0.6 mongodb-org-server=7.0.6 mongodb-mongosh=2.1.5 mongodb-org-mongos=7.0.6 mongodb-org-tools=7.0.6`
 
-5. Hold package versions to prevent automatic updates:
+5. Hold package versions to prevent automatic updates as this could update to a version that breaks our application:
 ```bash
 echo "mongodb-org hold" | sudo dpkg --set-selections
 echo "mongodb-org-database hold" | sudo dpkg --set-selections
@@ -146,8 +147,9 @@ echo "mongodb-org-mongos hold" | sudo dpkg --set-selections
 echo "mongodb-org-tools hold" | sudo dpkg --set-selections
 ```
 
-6. Configure MongoDB Bind IP by modifying the MongoDB configuration file: `sudo vim /etc/mongod.conf`
-     - Change bind ip to 0.0.0.0.
+6. Then we need to configure MongoDB Bind IP where we modify the MongoDB configuration file to allow inbound traffic from all sources within the VNet
+    - We can do this by: `sudo vim /etc/mongod.conf`
+    - Change bind ip to 0.0.0.0.
   
 7. Start the MongoDB service:<br>
     - `sudo systemctl start mongod`
@@ -155,6 +157,7 @@ echo "mongodb-org-tools hold" | sudo dpkg --set-selections
 
 8. Check the MongoDB service status: `sudo systemctl status mongod`
 ![alt text](img/readme_img/image-7.png)
+Now we need to connect the application to the database
 
 ### Connecting Application to MongoDB
 1. Set the environment variable to connect the application to the MongoDB database:
@@ -174,7 +177,9 @@ Change into the app directory and install npm and start the app:
 3. Make sure the security group for the database has an inbound rule open on port 27017
 
 Verify the connection by checking if the application is connected properly: 
-- Add the /posts extension to the application address (<application-domain>/posts). This should display the correct webpage.
+- Add the /posts extension to the application address (<application-domain>/posts). <br>
+
+This should display the correct webpage.
 
 ![alt text](img/readme_img/image-9.png)
 

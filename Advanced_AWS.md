@@ -154,5 +154,5 @@ To clean up resources, follow these steps:
   ![alt text](img/image-48.png)
 
 3. Delete Autoscaling Groups:
-  - Remove the autoscaling groups from the AWS Management Console.
+  - Remove the autoscaling groups from the AWS Management Console.<br>
  ![alt text](img/image-49.png)

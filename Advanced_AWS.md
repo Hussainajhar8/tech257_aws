@@ -147,9 +147,12 @@ To clean up resources, follow these steps:
 
 1. Delete Load Balancers:
   - Navigate to Load Balancers and delete the relevant load balancers.
+  ![alt text](img/image-47.png)
 
 2. Delete Target Groups:
   - Go to Target Groups and delete any associated target groups.
+  ![alt text](img/image-48.png)
 
 3. Delete Autoscaling Groups:
   - Remove the autoscaling groups from the AWS Management Console.
+ ![alt text](img/image-49.png)

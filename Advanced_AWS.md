@@ -47,7 +47,7 @@ Ensure the application is running as intended on the new instance.
    - Delete the AMI:
      1. Click on your AMI and select **Deregister AMI**.
       ![alt text](img/image-16.png)
-     2. Here we can see that we should delete the associated snapshot, copy the id and then proceed to delete the ami, after deleting the ami delete the snapshot.
+     2. Here we can see that we should delete the associated snapshot, copy the id and then proceed to delete the ami, after deleting the ami delete the snapshot.<br>
       ![alt text](img/image-17.png)
       ![alt text](img/image-18.png)
      3. Delete the associated snapshot by copying the snapshot ID, then clicking on it, selecting **Actions**, and choosing **Delete Snapshot**. Confirm the deletion.

@@ -1,18 +1,18 @@
 ### Launching an AWS EC2 Instance
 
 1. Log into the AWS console.
-2. Navigate to the EC2 section and click on "Launch Instance." ![alt text](img/readme_img/image.png)
-3. Fill in the instance details, ensuring to select a Ubuntu 22.04 img/readme_img/image and t2.micro instance type.
+2. Navigate to the EC2 section and click on "Launch Instance." ![alt text](img/image.png)
+3. Fill in the instance details, ensuring to select a Ubuntu 22.04 img/image and t2.micro instance type.
 4. Select "tech257" as the key pair and ensure it has been downloaded and placed in the `.ssh/` folder.
 5. Edit the security group, rename it appropriately, and open ports 80 and 22. Port 3000 is not required to be opened as we will configure a reverse proxy.
 6. Launch the instance when the EC2 configuration is complete.
-![alt text](img/readme_img/image-1.png)
+![alt text](img/image-1.png)
 
 ### Connecting to the EC2 Instance
 
 1. Once the instance is initialized, open it and click on "Connect" and then "SSH client" to SSH into the virtual machine. Copy and paste the command into a Git Bash terminal.
 
-![alt text](img/readme_img/image-2.png)
+![alt text](img/image-2.png)
 ### Configuring the Instance
 
 1. Update and upgrade the system by running the following commands:
@@ -30,7 +30,7 @@
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs
     ```
     - (If we didn’t use the DEBIAN_FRONTEND=noninteractive we would of gotten the following prompt)<br>
-    ![alt text](img/readme_img/image-4.png)
+    ![alt text](img/image-4.png)
     - This isn’t an issue now when deploying the application manually, but it should be bypassed when scripting. <br>
     - Another solution to the restart prompt is to enable it automatically in the needrestart.conf file which can be found in `/etc/needrestart/needrestart.conf`, you would need to edit `#$nrconf{restart} = 'i'`; to `#$nrconf{restart} = 'a'`;, this could be done manually using `sudo nano /etc/needrestart/needrestart.conf` and in a script using the `sed` command.
 
@@ -53,7 +53,7 @@
     pm2 start app.js
     ```
 The end product should be a working application!
-![alt text](img/readme_img/image-3.png)
+![alt text](img/image-3.png)
 To automate this process we can write this all as a script and enter this as user data upon creating and launching an instance
 
 ### Final script
@@ -107,17 +107,17 @@ pm2 save
 #### Deploying the Database Instance
 Similiar to before but now to deploy the database instance
 1. Log into the AWS console.
-2. Navigate to the EC2 section and click on "Launch Instance." ![alt text](img/readme_img/image-5.png)
+2. Navigate to the EC2 section and click on "Launch Instance." ![alt text](img/image-5.png)
 3. Fill in the instance details, ensuring to select a Ubuntu 22.04 image and t2.micro instance type.
 4. Select "tech257" as the key pair and ensure it has been downloaded and placed in the `.ssh/` folder.
 5. Edit the security group, rename it appropriately, and open port 22 only.
 6. Launch the instance when the EC2 instance has been configured properly.
-![alt text](img/readme_img/image-6.png)
+![alt text](img/image-6.png)
 
 #### Connecting to the Database Instance
 
  Once the instance is initialized, open it and click on "Connect" and then "SSH client" to SSH into the virtual machine. Copy and paste the command into a Git Bash terminal.
- ![alt text](img/readme_img/image-2.png)
+ ![alt text](img/image-2.png)
 
 #### Configuring the Database Instance
 
@@ -156,7 +156,7 @@ echo "mongodb-org-tools hold" | sudo dpkg --set-selections
     - `sudo systemctl enable mongod`
 
 8. Check the MongoDB service status: `sudo systemctl status mongod`
-![alt text](img/readme_img/image-7.png)
+![alt text](img/image-7.png)
 Now we need to connect the application to the database
 
 ### Connecting Application to MongoDB
@@ -164,7 +164,7 @@ Now we need to connect the application to the database
     - SSH into the application VM.
     - Set up the environment variable:
     - `export DB_HOST=mongodb://<public-or-private-ip-of-database>:27017/posts`
-   ![alt text](img/readme_img/image-8.png)
+   ![alt text](img/image-8.png)
 2. Stop the current application process:
 Change into the app directory and install npm and start the app:
     - `cd tech257_sparta_app/repo/app/`
@@ -181,7 +181,7 @@ Verify the connection by checking if the application is connected properly:
 
 This should display the correct webpage.
 
-![alt text](img/readme_img/image-9.png)
+![alt text](img/image-9.png)
 
 ## Bash Script for Database Deployment:
 ```bash

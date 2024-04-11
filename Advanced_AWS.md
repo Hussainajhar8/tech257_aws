@@ -23,18 +23,18 @@ Fill in the name, description, and tags for the AMI. Adjust the EBS storage as n
    ![alt text](img/image-13.png)
   2. Because user-data does not rerun upon reboot, launch a new instance from the AMI to ensure the application runs upon boot. 
       - Include user-data for our use-case, such as:
-        ```bash
-        #!/bin/bash
-        # Move to app repo
-        cd tech257_sparta_app/repo/app/
+```bash
+#!/bin/bash
+# Move to app repo
+cd tech257_sparta_app/repo/app/
 
-        # Stop any running processes
-        pm2 stop all
+# Stop any running processes
+pm2 stop all
 
-        # Run the application using pm2
-        pm2 start app.js
-        ```
-  3. Fill in as needed and ensure to include user-data for our use-case
+# Run the application using pm2
+pm2 start app.js
+```
+  1. Fill in as needed and ensure to include user-data for our use-case
    ![alt text](img/image-14.png)
 
 ## 4. Verify Application
@@ -179,20 +179,20 @@ We should have a database image so that we can deploy a mongo database in a priv
 4. **Update App User Data**:
    - Modify the user data of the application VM to export the database IP address.
    - Use the following script:
-      ```bash
-        #!/bin/bash
+```bash
+#!/bin/bash
 
-        # Connect to the database from application vm
-        export DB_HOST=mongodb://<private-ip-of-db>:27017/posts
-        # Move to app repo
-        cd tech257_sparta_app/repo/app/
-        # Install npm in the environment
-        npm -E install
-        # Stop any running processes
-        pm2 stop all
-        # Run the application using pm2
-        pm2 start app.js
-        ```
+# Connect to the database from application vm
+export DB_HOST=mongodb://<private-ip-of-db>:27017/posts
+# Move to app repo
+cd tech257_sparta_app/repo/app/
+# Install npm in the environment
+npm -E install
+# Stop any running processes
+pm2 stop all
+# Run the application using pm2
+pm2 start app.js
+ ```
         
 
 # Creating VPC
@@ -252,5 +252,3 @@ We will create our own Virtual Private Cloud (VPC) to isolate our resources and 
    - Remove instances.
    - Remove security groups.
    - Remove the VPC (this will also delete route tables and subnets).
-
-

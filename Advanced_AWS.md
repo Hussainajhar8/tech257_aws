@@ -195,7 +195,7 @@ pm2 start app.js
  ```
         
 
-# Creating VPC
+# Creating a VPC
 
 We will create our own Virtual Private Cloud (VPC) to isolate our resources and increase security for our two-tier deployment. Using a VPC allows us to have control over our network environment, enabling us to define our own IP address range, create subnets, and configure route tables and gateways, enhancing security by ensuring that our resources are only accessible within the defined network boundaries.
 

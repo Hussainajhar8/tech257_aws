@@ -156,3 +156,42 @@ To clean up resources, follow these steps:
 3. Delete Autoscaling Groups:
   - Remove the autoscaling groups from the AWS Management Console.<br>
  ![alt text](img/image-49.png)
+
+# Create Database AMI
+
+We should have a database image so that we can deploy a mongo database in a private subnet without any configurations:
+
+1. **Create Database AMI**:
+   - Launch an EC2 instance and install the database using the installation script.
+   - SSH into the instance and confirm that the MongoDB service is running.
+    ![alt text](image-50.png)
+   - Create an image (AMI) from this instance.
+    ![alt text](image-51.png)
+
+2. **Test AMI**:
+   - Launch a new instance from the AMI to ensure it works properly.
+   - Try to connect to the application and check `/posts` to verify connectivity.
+    ![alt text](image-52.png)
+
+3. **Remove Running Instances**:
+   - Once the AMI is confirmed to be working, remove any running instances as they are no longer needed.
+
+4. **Update App User Data**:
+   - Modify the user data of the application VM to export the database IP address.
+   - Use the following script:
+      ```bash
+        #!/bin/bash
+
+        # Connect to the database from application vm
+        export DB_HOST=mongodb://<private-ip-of-db>:27017/posts
+        # Move to app repo
+        cd tech257_sparta_app/repo/app/
+        # Install npm in the environment
+        npm -E install
+        # Stop any running processes
+        pm2 stop all
+        # Run the application using pm2
+        pm2 start app.js
+        ```
+        
+

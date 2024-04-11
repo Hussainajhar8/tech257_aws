@@ -71,3 +71,13 @@ In Azure, you will have to run the waagent deprovision user command in the virtu
 - Delete the AMI:
   - Deregister the AMI.
   - Delete the associated snapshot.
+
+
+### Security groups
+
+#### AWS:
+- Security groups are only for VMs and are stateful by default.
+- Subnets use NACL and are stateless by default.
+
+#### Azure:
+Security group can link to NIC (for VM) and subnets.

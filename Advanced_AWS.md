@@ -164,14 +164,14 @@ We should have a database image so that we can deploy a mongo database in a priv
 1. **Create Database AMI**:
    - Launch an EC2 instance and install the database using the installation script.
    - SSH into the instance and confirm that the MongoDB service is running.
-    ![alt text](image-50.png)
+    ![alt text](img/image-50.png)
    - Create an image (AMI) from this instance.
-    ![alt text](image-51.png)
+    ![alt text](img/image-51.png)
 
 2. **Test AMI**:
    - Launch a new instance from the AMI to ensure it works properly.
    - Try to connect to the application and check `/posts` to verify connectivity.
-    ![alt text](image-52.png)
+    ![alt text](img/image-52.png)
 
 3. **Remove Running Instances**:
    - Once the AMI is confirmed to be working, remove any running instances as they are no longer needed.
@@ -194,4 +194,63 @@ We should have a database image so that we can deploy a mongo database in a priv
         pm2 start app.js
         ```
         
+
+# Creating VPC
+
+We will create our own Virtual Private Cloud (VPC) to isolate our resources and increase security for our two-tier deployment. Using a VPC allows us to have control over our network environment, enabling us to define our own IP address range, create subnets, and configure route tables and gateways, enhancing security by ensuring that our resources are only accessible within the defined network boundaries.
+
+![alt text](img/image-53.png)
+
+1. **Create VPC**:
+   - Navigate to the VPC section and create a new VPC.
+   - Set up the VPC with a `10.0.0.0/16` CIDR range and click "Create".
+     ![alt text](img/image-54.png)
+
+2. **Create Subnets**:
+   - Click on the newly created VPC and create subnets.
+   - Add a public subnet.
+    ![alt text](img/image-55.png)
+   - Add a private subnet. 
+    ![alt text](img/image-56.png)
+   - Ensure that both subnets are created successfully.
+     ![alt text](img/image-57.png)
+
+3. **Set Up Internet Gateway**:
+   - Create an internet gateway (IG) and attach it to the VPC.
+  ![alt text](img/image-58.png)
+   - Select the VPC and attach the internet gateway.
+   ![alt text](img/image-59.png)
+   ![alt text](img/image-60.png)
+
+4. **Create Public Route Table**:
+   - Create a public route table.
+     ![alt text](img/image-61.png)
+   - Edit the route table subnet associations and add the public subnet.
+     ![alt text](img/image-62.png)
+   - Associate the route table with the internet gateway.
+   - Add the internet gateway as a target with `0.0.0.0/0` as the destination.
+     ![alt text](img/image-63.png)
+
+5. **Confirm Configuration**:
+   - Verify that the resource map for the VPC looks as intended.
+   ![alt text](img/image-64.png)
+
+6. **Launch Database VM**:
+   - Launch a database VM from the AMI with the correct network settings.
+    ![alt text](img/image-65.png)
+   - Click "Launch" and ensure it is running.
+
+7. **Launch Application VM**:
+   - Launch an application VM from the AMI with the correct network settings.
+    ![alt text](img/image-66.png)
+   - Configure the user data to export the database host (`db_host`).
+    ![alt text](img/image-67.png)
+   - Click "Create" and verify that the application and `/posts` page work as expected.
+     ![alt text](img/image-68.png)
+
+8. **Clean Up**:
+   - Remove instances.
+   - Remove security groups.
+   - Remove the VPC (this will also delete route tables and subnets).
+
 

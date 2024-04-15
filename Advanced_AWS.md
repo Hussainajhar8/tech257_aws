@@ -346,7 +346,7 @@ To perform CRUD operations on S3 buckets using Python boto3, follow these steps:
 1. **Install Boto3**:
    - Run `sudo pip install boto3` to install the boto3 library.
 
-1. **List All S3 Buckets**:
+2. **List All S3 Buckets**:
    - Create an S3 client and list all buckets.
 ```bash
 import boto3
@@ -361,9 +361,9 @@ response = s3.list_buckets()
 for bucket in response['Buckets']:
    print(bucket['Name'])
 ```
-![alt text](img/image-78.png)
+![alt text](img/image-78.png)<br>
 
-2. **Create an S3 Bucket**:
+3. **Create an S3 Bucket**:
    - Create an S3 client and specify the bucket name to create a new bucket.
 ```bash
 import boto3
@@ -377,9 +377,9 @@ bucket_name = 'tech257-ajhar-test-boto3'
 # Create bucket
 s3.create_bucket(Bucket=bucket_name)
 ```
-![alt text](img/image-79.png)
+![alt text](img/image-79.png)<br>
 
-3. **Upload Data/File to S3 Bucket**:
+4. **Upload Data/File to S3 Bucket**:
    - Create an S3 client and specify the file path to upload a file to the bucket.
 ```bash
 import boto3
@@ -396,8 +396,8 @@ file_path = 'test.txt'
 # Upload file
 s3.upload_file(file_path, bucket_name, 'test.txt')
 ```
-![alt text](img/image-80.png)
-4. **Download/Retrieve Content/File from S3 Bucket**:
+![alt text](img/image-80.png)<br>
+5. **Download/Retrieve Content/File from S3 Bucket**:
    - Create an S3 client and specify the file path to download a file from the bucket.
 ```bash
 import boto3
@@ -414,8 +414,8 @@ file_path ='test.txt'
 # Download file
 s3.download_file(bucket_name, 'test.txt', file_path)
 ```
-![alt text](img/image-81.png)
-5. **Delete Content/File from S3 Bucket**:
+![alt text](img/image-81.png)<br>
+6. **Delete Content/File from S3 Bucket**:
    - Create an S3 client and specify the file key to delete a file from the bucket.
 ```bash
 import boto3
@@ -432,8 +432,8 @@ file_key = 'test.txt'
 # Delete file
 s3.delete_object(Bucket=bucket_name, Key=file_key)
 ```
-![alt text](img/image-82.png)
-6. **Delete the Bucket**:
+![alt text](img/image-82.png)<br>
+7. **Delete the Bucket**:
    - Create an S3 client and specify the bucket name to delete the bucket.
 ```bash
 import boto3
@@ -447,4 +447,4 @@ bucket_name = 'tech257-ajhar-test-boto3'
 # Delete bucket
 s3.delete_bucket(Bucket=bucket_name)
 ```
-![alt text](img/image-83.png)
+![alt text](img/image-83.png)<br>

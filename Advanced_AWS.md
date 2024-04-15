@@ -5,6 +5,7 @@
 3. [Creating an Autoscaling Group](#creating-an-autoscaling-group)
 4. [Create Database AMI](#create-database-ami)
 5. [Creating a VPC](#creating-a-vpc)
+6. [S3 and creating a bucket with AWS CLI](#simple-storage-service-s3)
 
 # Creating AMI
 

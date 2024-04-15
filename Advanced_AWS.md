@@ -11,7 +11,7 @@
 ## 1. Create a Running Instance
 
 Launch a running instance to create an AMI from.
-![alt text](image-10.png)
+![alt text](img/image-10.png)
 
 ## 2. Create Image from Instance
 
@@ -20,15 +20,15 @@ From the instance page, follow these steps:
    2. Select **Image and templates**.
    3. Choose **Create Image**.
 
-![alt text](image-11.png)
+![alt text](img/image-11.png)
    
 Fill in the name, description, and tags for the AMI. Adjust the EBS storage as needed, then click **Create Image**.
-![alt text](image-12.png)
+![alt text](img/image-12.png)
 
 ## 3. Launch Instance from AMI
 
   1. Here we can see our ami is created and available.
-   ![alt text](image-13.png)
+   ![alt text](img/image-13.png)
   2. Because user-data does not rerun upon reboot, launch a new instance from the AMI to ensure the application runs upon boot. 
       - Include user-data for our use-case, such as:
 ```bash
@@ -43,94 +43,94 @@ pm2 stop all
 pm2 start app.js
 ```
   1. Fill in as needed and ensure to include user-data for our use-case
-   ![alt text](image-14.png)
+   ![alt text](img/image-14.png)
 
 ## 4. Verify Application
 
 Ensure the application is running as intended on the new instance.
-![alt text](image-15.png)
+![alt text](img/image-15.png)
 
 ## 5. Clean Up
 
    - Delete the AMI:
      1. Click on your AMI and select **Deregister AMI**.
-      ![alt text](image-16.png)
+      ![alt text](img/image-16.png)
      2. Here we can see that we should delete the associated snapshot, copy the id and then proceed to delete the ami, after deleting the ami delete the snapshot.<br>
-      ![alt text](image-17.png)
-      ![alt text](image-18.png)
+      ![alt text](img/image-17.png)
+      ![alt text](img/image-18.png)
      3. Delete the associated snapshot by copying the snapshot ID, then clicking on it, selecting **Actions**, and choosing **Delete Snapshot**. Confirm the deletion.
-     ![alt text](image-19.png)
+     ![alt text](img/image-19.png)
      4. (Note: Deleting the snapshot must be after deregistration of the AMI otherwise you will get the following error)
-      ![alt text](image-20.png)
+      ![alt text](img/image-20.png)
 
 # Monitoring Instances
 
 To monitor instances, navigate to the instance and scroll down. Click on "Monitoring".
-![alt text](image-25.png)
+![alt text](img/image-25.png)
 
 - Enable Detailed Monitoring:
   - Click on "Manage detailed monitoring" to enable detailed monitoring for the instance.
-  ![alt text](image-26.png)
+  ![alt text](img/image-26.png)
 - Add to Dashboard:
   - You can also add the instance to a centralized dashboard by selecting "Add to dashboard".
   - Choose "Create new dashboard" and then add the instance to the dashboard.
-  ![alt text](image-27.png)
+  ![alt text](img/image-27.png)
 
 # Creating an Autoscaling Group
 
-![alt text](image-46.png)
+![alt text](img/image-46.png)
 
 ## Start with Launch Template
-![alt text](image-28.png)
+![alt text](img/image-28.png)
 
 - Select the configuration for the app instance.
-![alt text](image-29.png)
+![alt text](img/image-29.png)
 - Create a launch template.
-![alt text](image-30.png)
+![alt text](img/image-30.png)
 - Launch an instance using this template to test its functionality.
-![alt text](image-31.png)
-![alt text](image-32.png)
+![alt text](img/image-31.png)
+![alt text](img/image-32.png)
 - Check application is working
-![alt text](image-33.png)
+![alt text](img/image-33.png)
 
 ## Create Autoscaling Group
-![alt text](image-34.png)
+![alt text](img/image-34.png)
 1. **Select Launch Template**:
    - Choose the launch template you created.
    
 2. **Select VPC and Subnets**:
    - Specify the VPC and subnets for the autoscaling group.
-   ![alt text](image-35.png)
+   ![alt text](img/image-35.png)
 
 3. **Attach Load Balancer**:
    - Choose `Attach a new load balancer` and select `Application Load Balancer`.
    - Configure it as `internet-facing`, ensure port 80 is open, and create or select a target group.
    - Enable `Elastic Load Balancing health checks`.
-  ![alt text](image-36.png)
+  ![alt text](img/image-36.png)
 
 4. **Configure Autoscaling**:
    - Set minimum, desired, and maximum capacity.
    - Select a target tracking policy (e.g., 50% CPU utilization).
    - Choose "launch before terminating" as the policy behavior.
-   ![alt text](image-37.png)
+   ![alt text](img/image-37.png)
 
 5. **Leave Default Configuration**:
    - Leave other settings as default.
 
 6. **Add Tags**:
    - Associate tags with any created instances.
-  ![alt text](image-38.png)
+  ![alt text](img/image-38.png)
 
 7. **Review and Create**:
    - Review the configuration and create the autoscaling group.
-  ![alt text](image-39.png)
+  ![alt text](img/image-39.png)
 
 ## Check Instances and Load Balancer
 
 - Verify that instances are created from the autoscaling group.
-  ![alt text](image-40.png)
+  ![alt text](img/image-40.png)
 - Check the load balancer URL to ensure it connects to the application instances.
- ![alt text](image-41.png)
+ ![alt text](img/image-41.png)
 
 ## Testing Autoscaling Group
 
@@ -138,15 +138,15 @@ To test the Autoscaling Group (ASG), terminate an instance and observe its behav
 
 - Terminate an Instance:
   - Terminate one of the instances within the ASG.
-  ![alt text](image-42.png)
+  ![alt text](img/image-42.png)
 
 - Verify Load Balancer Behavior:
   - The load balancer should continue sending traffic to the terminated instance until it realises that the instance fails the health check.
-  ![alt text](image-43.png)
+  ![alt text](img/image-43.png)
 
 - New Instance Creation:
   - Once the terminated instance fails the health check, a new instance should be created by the ASG.
-  ![alt text](image-44.png)
+  ![alt text](img/image-44.png)
   - This confirms our autoscaling group maintaining the minimum set instances
 
 ## Cleaning Up
@@ -155,15 +155,15 @@ To clean up resources, follow these steps:
 
 1. Delete Load Balancers:
   - Navigate to Load Balancers and delete the relevant load balancers.
-  ![alt text](image-47.png)
+  ![alt text](img/image-47.png)
 
 2. Delete Target Groups:
   - Go to Target Groups and delete any associated target groups.
-  ![alt text](image-48.png)
+  ![alt text](img/image-48.png)
 
 3. Delete Autoscaling Groups:
   - Remove the autoscaling groups from the AWS Management Console.<br>
- ![alt text](image-49.png)
+ ![alt text](img/image-49.png)
 
 # Create Database AMI
 
@@ -172,14 +172,14 @@ We should have a database image so that we can deploy a mongo database in a priv
 1. **Create Database AMI**:
    - Launch an EC2 instance and install the database using the installation script.
    - SSH into the instance and confirm that the MongoDB service is running.
-    ![alt text](image-50.png)
+    ![alt text](img/image-50.png)
    - Create an image (AMI) from this instance.
-    ![alt text](image-51.png)
+    ![alt text](img/image-51.png)
 
 2. **Test AMI**:
    - Launch a new instance from the AMI to ensure it works properly.
    - Try to connect to the application and check `/posts` to verify connectivity.
-    ![alt text](image-52.png)
+    ![alt text](img/image-52.png)
 
 3. **Remove Running Instances**:
    - Once the AMI is confirmed to be working, remove any running instances as they are no longer needed.
@@ -207,54 +207,54 @@ pm2 start app.js
 
 We will create our own Virtual Private Cloud (VPC) to isolate our resources and increase security for our two-tier deployment. Using a VPC allows us to have control over our network environment, enabling us to define our own IP address range, create subnets, and configure route tables and gateways, enhancing security by ensuring that our resources are only accessible within the defined network boundaries.
 
-![alt text](image-53.png)
+![alt text](img/image-53.png)
 
 1. **Create VPC**:
    - Navigate to the VPC section and create a new VPC.
    - Set up the VPC with a `10.0.0.0/16` CIDR range and click "Create".
-     ![alt text](image-54.png)
+     ![alt text](img/image-54.png)
 
 2. **Create Subnets**:
    - Click on the newly created VPC and create subnets.
    - Add a public subnet.
-    ![alt text](image-55.png)
+    ![alt text](img/image-55.png)
    - Add a private subnet. 
-    ![alt text](image-56.png)
+    ![alt text](img/image-56.png)
    - Ensure that both subnets are created successfully.
-     ![alt text](image-57.png)
+     ![alt text](img/image-57.png)
 
 3. **Set Up Internet Gateway**:
    - Create an internet gateway (IG) and attach it to the VPC.
-  ![alt text](image-58.png)
+  ![alt text](img/image-58.png)
    - Select the VPC and attach the internet gateway.
-   ![alt text](image-59.png)
-   ![alt text](image-60.png)
+   ![alt text](img/image-59.png)
+   ![alt text](img/image-60.png)
 
 4. **Create Public Route Table**:
    - Create a public route table.
-     ![alt text](image-61.png)
+     ![alt text](img/image-61.png)
    - Edit the route table subnet associations and add the public subnet.
-     ![alt text](image-62.png)
+     ![alt text](img/image-62.png)
    - Associate the route table with the internet gateway.
    - Add the internet gateway as a target with `0.0.0.0/0` as the destination.
-     ![alt text](image-63.png)
+     ![alt text](img/image-63.png)
 
 5. **Confirm Configuration**:
    - Verify that the resource map for the VPC looks as intended.
-   ![alt text](image-64.png)
+   ![alt text](img/image-64.png)
 
 6. **Launch Database VM**:
    - Launch a database VM from the AMI with the correct network settings.
-    ![alt text](image-65.png)
+    ![alt text](img/image-65.png)
    - Click "Launch" and ensure it is running.
 
 7. **Launch Application VM**:
    - Launch an application VM from the AMI with the correct network settings.
-    ![alt text](image-66.png)
+    ![alt text](img/image-66.png)
    - Configure the user data to export the database host (`db_host`).
-    ![alt text](image-67.png)
+    ![alt text](img/image-67.png)
    - Click "Create" and verify that the application and `/posts` page work as expected.
-     ![alt text](image-68.png)
+     ![alt text](img/image-68.png)
 
 8. **Clean Up**:
    - Remove instances.
@@ -272,7 +272,7 @@ We will create our own Virtual Private Cloud (VPC) to isolate our resources and 
 ## Getting Started:
 1. **Launch EC2 Instance**:
    - Launch an EC2 instance with Ubuntu 22.04 and port 22 open.
-   ![alt text](image-69.png)
+   ![alt text](img/image-69.png)
 
 2. **SSH into Instance and Update**:
    - SSH into the instance and perform an update and upgrade:
@@ -290,14 +290,14 @@ We will create our own Virtual Private Cloud (VPC) to isolate our resources and 
 
 4. **Configure AWS CLI**:
    - Run `aws configure` to log in to your AWS account.
-    ![alt text](image-70.png)
+    ![alt text](img/image-70.png)
 
 5. **Create S3 Bucket**:
    - Create an S3 bucket using the AWS CLI:
      ```
      aws s3 mb s3://<s3_name>
      ```
-     ![alt text](image-71.png)
+     ![alt text](img/image-71.png)
 
 6. **Upload and Manage Objects**:
    - Upload a file to the S3 bucket:
@@ -308,13 +308,13 @@ We will create our own Virtual Private Cloud (VPC) to isolate our resources and 
      ```
      aws s3 ls <bucket>
      ```
-     ![alt text](image-72.png)
-     ![alt text](image-73.png)
+     ![alt text](img/image-72.png)
+     ![alt text](img/image-73.png)
    - Download the contents of the bucket locally:
      ```
      aws s3 sync <bucket_path> <directory_destination>
      ```
-     ![alt text](image-74.png)
+     ![alt text](img/image-74.png)
    - Upload files from a local directory to the bucket:
      ```
      aws s3 sync <directory_path> <bucket_destination>
@@ -329,9 +329,9 @@ We will create our own Virtual Private Cloud (VPC) to isolate our resources and 
      ```
      aws s3 rm --recursive <bucket>
      ```
-     ![alt text](image-75.png)
+     ![alt text](img/image-75.png)
    - :warning: Delete a bucket along with its files:
      ```
      aws s3 rb --force <bucket_name>
      ```
-     ![alt text](image-76.png)
+     ![alt text](img/image-76.png)

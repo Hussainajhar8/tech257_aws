@@ -294,6 +294,8 @@ We will create our own Virtual Private Cloud (VPC) to isolate our resources and 
     ![alt text](img/image-70.png)
 
 5. **Create S3 Bucket**:
+   - We will learn how to do CRUD methods with AWS CLI:
+     ![alt text](img/image-77.png)
    - Create an S3 bucket using the AWS CLI:
      ```
      aws s3 mb s3://<s3_name>
@@ -336,3 +338,112 @@ We will create our own Virtual Private Cloud (VPC) to isolate our resources and 
      aws s3 rb --force <bucket_name>
      ```
      ![alt text](img/image-76.png)
+
+## CRUD Operations with Boto3 (Python SDK):
+To perform CRUD operations on S3 buckets using Python boto3, follow these steps:
+
+1. **Install Boto3**:
+   - Run `sudo pip install boto3` to install the boto3 library.
+
+1. **List All S3 Buckets**:
+   - Create an S3 client and list all buckets.
+```bash
+import boto3
+
+# Create an S3 client
+s3 = boto3.client('s3')
+
+# List all buckets
+response = s3.list_buckets()
+
+# Print bucket names
+for bucket in response['Buckets']:
+   print(bucket['Name'])
+```
+![alt text](img/image-78.png)
+
+2. **Create an S3 Bucket**:
+   - Create an S3 client and specify the bucket name to create a new bucket.
+```bash
+import boto3
+
+# Create an S3 client
+s3 = boto3.client('s3')
+
+# Bucket name
+bucket_name = 'tech257-ajhar-test-boto3'
+
+# Create bucket
+s3.create_bucket(Bucket=bucket_name)
+```
+![alt text](img/image-79.png)
+
+3. **Upload Data/File to S3 Bucket**:
+   - Create an S3 client and specify the file path to upload a file to the bucket.
+```bash
+import boto3
+
+# Create an S3 client
+s3 = boto3.client('s3')
+
+# Bucket name
+bucket_name = 'tech257-ajhar-test-boto3'
+
+# File to upload
+file_path = 'test.txt'
+
+# Upload file
+s3.upload_file(file_path, bucket_name, 'test.txt')
+```
+![alt text](img/image-80.png)
+4. **Download/Retrieve Content/File from S3 Bucket**:
+   - Create an S3 client and specify the file path to download a file from the bucket.
+```bash
+import boto3
+
+# Create an S3 client
+s3 = boto3.client('s3')
+
+# Bucket name
+bucket_name = 'tech257-ajhar-test-boto3'
+
+# File to download
+file_path ='test.txt'
+
+# Download file
+s3.download_file(bucket_name, 'test.txt', file_path)
+```
+![alt text](img/image-81.png)
+5. **Delete Content/File from S3 Bucket**:
+   - Create an S3 client and specify the file key to delete a file from the bucket.
+```bash
+import boto3
+
+# Create an S3 client
+s3 = boto3.client('s3')
+
+# Bucket name
+bucket_name = 'tech257-ajhar-test-boto3'
+
+# File to delete
+file_key = 'test.txt'
+
+# Delete file
+s3.delete_object(Bucket=bucket_name, Key=file_key)
+```
+![alt text](img/image-82.png)
+6. **Delete the Bucket**:
+   - Create an S3 client and specify the bucket name to delete the bucket.
+```bash
+import boto3
+
+# Create an S3 client
+s3 = boto3.client('s3')
+
+# Bucket name
+bucket_name = 'tech257-ajhar-test-boto3'
+
+# Delete bucket
+s3.delete_bucket(Bucket=bucket_name)
+```
+![alt text](img/image-83.png)

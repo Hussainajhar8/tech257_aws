@@ -1,14 +1,28 @@
 # Index
 
-1. [Creating AMI](#creating-ami)
-2. [Monitoring Instances](#monitoring-instances)
-3. [Creating an Autoscaling Group](#creating-an-autoscaling-group)
-4. [Create Database AMI](#create-database-ami)
-5. [Creating a VPC](#creating-a-vpc)
-6. [S3 and CRUD Operations with AWS CLI](#simple-storage-service-s3)
-   - [S3 CRUD Operations with Boto3](#crud-operations-with-boto3-python-sdk)
+- [Index](#index)
+- [Creating AMIs](#creating-amis)
+  - [1. Create a Running Instance](#1-create-a-running-instance)
+  - [2. Create Image from Instance](#2-create-image-from-instance)
+  - [3. Launch Instance from AMI](#3-launch-instance-from-ami)
+  - [4. Verify Application](#4-verify-application)
+  - [5. Clean Up](#5-clean-up)
+- [Monitoring Instances](#monitoring-instances)
+- [Creating an Autoscaling Group](#creating-an-autoscaling-group)
+  - [Start with Launch Template](#start-with-launch-template)
+  - [Create Autoscaling Group](#create-autoscaling-group)
+  - [Check Instances and Load Balancer](#check-instances-and-load-balancer)
+  - [Testing Autoscaling Group](#testing-autoscaling-group)
+  - [Cleaning Up](#cleaning-up)
+- [Create Database AMI](#create-database-ami)
+- [Creating a VPC](#creating-a-vpc)
+- [Simple Storage Service (S3)](#simple-storage-service-s3)
+  - [Advantages:](#advantages)
+  - [Getting Started:](#getting-started)
+  - [CRUD Operations with Boto3 (Python SDK):](#crud-operations-with-boto3-python-sdk)
+- [Creating Alerts and Alarms](#creating-alerts-and-alarms)
 
-# Creating AMI
+# Creating AMIs
 
 ## 1. Create a Running Instance
 
@@ -448,3 +462,38 @@ bucket_name = 'tech257-ajhar-test-boto3'
 s3.delete_bucket(Bucket=bucket_name)
 ```
 ![alt text](img/image-83.png)<br>
+
+# Creating Alerts and Alarms
+
+To set up alerts and create alarms for an EC2 instance, follow these steps:
+
+1. **Launch EC2 Instance**:
+   - Launch an EC2 instance.
+   ![alt text](img/image-84.png)
+
+2. **Enable Detailed Monitoring**:
+   - On the EC2 instance, navigate to monitoring settings and enable detailed monitoring.
+   
+3. **Create a Dashboard**:
+   - Create a dashboard and add CPU usage metrics to it for monitoring.
+    ![alt text](img/image-85.png)
+
+4. **Create an Alarm**:
+   - Set up an alarm based on CPU usage metrics. Define the threshold at which the alarm should trigger.
+    ![alt text](img/image-86.png)<br>
+    ![alt text](img/image-87.png)
+
+5. **Stress CPU to Trigger Alarm**:
+   - Stress the CPU of the EC2 instance to surpass the defined threshold and trigger the alarm.
+    ![alt text](img/image-88.png)
+
+6. **Monitor Alarm Triggering**:
+   - Look at the graph to observe when the alarm is triggered due to increased CPU usage.
+    ![alt text](img/image-89.png)
+
+7. **Confirm Email Notification**:
+   - Ensure that email notifications are configured to be received when the alarm is triggered. Verify that the email notification is received.
+    ![alt text](img/image-90.png)
+
+8. **Clean Up**:
+   - After testing, clean up resources by deleting the EC2 instance and any associated alarms and dashboards.

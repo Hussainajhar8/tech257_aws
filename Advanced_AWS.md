@@ -1,26 +1,13 @@
 # Index
 
-- [Index](#index)
-- [Creating AMIs](#creating-amis)
-  - [1. Create a Running Instance](#1-create-a-running-instance)
-  - [2. Create Image from Instance](#2-create-image-from-instance)
-  - [3. Launch Instance from AMI](#3-launch-instance-from-ami)
-  - [4. Verify Application](#4-verify-application)
-  - [5. Clean Up](#5-clean-up)
-- [Monitoring Instances](#monitoring-instances)
-- [Creating an Autoscaling Group](#creating-an-autoscaling-group)
-  - [Start with Launch Template](#start-with-launch-template)
-  - [Create Autoscaling Group](#create-autoscaling-group)
-  - [Check Instances and Load Balancer](#check-instances-and-load-balancer)
-  - [Testing Autoscaling Group](#testing-autoscaling-group)
-  - [Cleaning Up](#cleaning-up)
-- [Create Database AMI](#create-database-ami)
-- [Creating a VPC](#creating-a-vpc)
-- [Simple Storage Service (S3)](#simple-storage-service-s3)
-  - [Advantages:](#advantages)
-  - [Getting Started:](#getting-started)
-  - [CRUD Operations with Boto3 (Python SDK):](#crud-operations-with-boto3-python-sdk)
-- [Creating Alerts and Alarms](#creating-alerts-and-alarms)
+1. [Creating AMI](#creating-ami)
+2. [Monitoring Instances](#monitoring-instances)
+3. [Creating an Autoscaling Group](#creating-an-autoscaling-group)
+4. [Create Database AMI](#create-database-ami)
+5. [Creating a VPC](#creating-a-vpc)
+6. [S3 and CRUD Operations with AWS CLI and boto3](#simple-storage-service-s3)
+7. [Creating an Alerts and Alarm](#creating-alerts-and-alarms)
+
 
 # Creating AMIs
 
